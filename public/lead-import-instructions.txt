@@ -1,0 +1,18 @@
+DESIGNMELA LEAD IMPORT — FICTIONAL DEMO DATA ONLY
+
+Supported: UTF-8 comma-separated CSV, XLSX, genuine Excel 97–2003 XLS.
+Limits: 5 MB, 2,000 data rows, 60 columns. First worksheet only; header in row 1 starting at A1.
+Do not use encrypted workbooks, formulas, macros, merged headings or duplicate headings.
+Full name is required, or map First name with optional Last name. Company and other fields are optional.
+Use ISO dates: YYYY-MM-DD, or YYYY-MM-DDTHH:mm:ssZ (or an explicit +05:30 offset).
+Calendar-only imported follow-up dates use 09:00 UTC, shown in the workspace time zone.
+Excel date cells are recognized. Format phone cells as Text to retain + and leading zeros.
+Use plain numbers without currency symbols or thousands separators for Estimated value.
+Services and tags may be comma separated. Quote comma-containing CSV values.
+Sources, stages, temperature, currency and consent must match the dropdown values in the app.
+Source defaults to CSV/Excel Import. Stage: New. Temperature: Cold. Currency: INR. Consent: Unknown.
+Blank cells in a mapped column update the corresponding field when updating duplicates.
+Existing source attribution and activities are preserved. Notes are appended, not replaced.
+No file is read until you confirm local processing, and no records change until Confirm Import.
+Nothing is uploaded. The original file is not retained. Data and reports disappear on reload.
+Only unchanged creations can be undone; existing-record updates cannot be undone.
