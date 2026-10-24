@@ -1,0 +1,921 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "test": "anonymous bootstrap denied",
+      "result": "PASS"
+    },
+    {
+      "test": "authenticated direct bootstrap denied",
+      "result": "PASS"
+    },
+    {
+      "test": "bootstrap rejects wrong configured email",
+      "result": "PASS"
+    },
+    {
+      "test": "bootstrap rejects unverified email",
+      "result": "PASS"
+    },
+    {
+      "test": "failed precondition bootstrap leaves no organization",
+      "result": "PASS"
+    },
+    {
+      "test": "late bootstrap failure is reported",
+      "result": "PASS"
+    },
+    {
+      "test": "failed bootstrap rolls back organization, profile, roles and singleton",
+      "result": "PASS"
+    },
+    {
+      "test": "bootstrap recovery and idempotence",
+      "result": "PASS"
+    },
+    {
+      "test": "bootstrap retry does not duplicate audit",
+      "result": "PASS"
+    },
+    {
+      "test": "second different owner bootstrap denied",
+      "result": "PASS"
+    },
+    {
+      "test": "bootstrap seeds seven roles and owner capabilities",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix owner: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix operations_admin: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix sales: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix delivery: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix content: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix finance: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: leads SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: audits SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: projects SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: tasks SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: content_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: automation_workflows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: automation_runs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: published_posts SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: notifications SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: clients SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: services SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: quotes SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: quote_items SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: proposals SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: payments SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: lead_activities SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: follow_ups SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: import_jobs SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: import_rows SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "matrix viewer: website_events SELECT/INSERT/UPDATE",
+      "result": "PASS"
+    },
+    {
+      "test": "API anonymous lead access denied",
+      "result": "PASS"
+    },
+    {
+      "test": "API cross-tenant owner read filtered",
+      "result": "PASS"
+    },
+    {
+      "test": "API viewer insertion denied",
+      "result": "PASS"
+    },
+    {
+      "test": "API self role escalation denied",
+      "result": "PASS"
+    },
+    {
+      "test": "API owner audit deletion denied",
+      "result": "PASS"
+    },
+    {
+      "test": "anonymous business read denied",
+      "result": "PASS"
+    },
+    {
+      "test": "anonymous business insert denied",
+      "result": "PASS"
+    },
+    {
+      "test": "cross-organization owner read filtered",
+      "result": "PASS"
+    },
+    {
+      "test": "cross-organization insert denied",
+      "result": "PASS"
+    },
+    {
+      "test": "cross-organization update filtered",
+      "result": "PASS"
+    },
+    {
+      "test": "viewer direct SQL insert denied",
+      "result": "PASS"
+    },
+    {
+      "test": "delivery direct lead read denied by RLS",
+      "result": "PASS"
+    },
+    {
+      "test": "sales direct SQL insert permitted",
+      "result": "PASS"
+    },
+    {
+      "test": "service role cannot bypass revoked business grants",
+      "result": "PASS"
+    },
+    {
+      "test": "self primary_role change denied",
+      "result": "PASS"
+    },
+    {
+      "test": "self status change denied",
+      "result": "PASS"
+    },
+    {
+      "test": "self organization_id change denied",
+      "result": "PASS"
+    },
+    {
+      "test": "self custom_role_id change denied",
+      "result": "PASS"
+    },
+    {
+      "test": "direct role-permission modification denied",
+      "result": "PASS"
+    },
+    {
+      "test": "direct override self-grant denied",
+      "result": "PASS"
+    },
+    {
+      "test": "non-owner cannot manage employees",
+      "result": "PASS"
+    },
+    {
+      "test": "owner cannot edit own access",
+      "result": "PASS"
+    },
+    {
+      "test": "owner action requires confirmation",
+      "result": "PASS"
+    },
+    {
+      "test": "owner action requires recent password",
+      "result": "PASS"
+    },
+    {
+      "test": "owner can suspend permitted employee",
+      "result": "PASS"
+    },
+    {
+      "test": "suspended session immediately loses read access",
+      "result": "PASS"
+    },
+    {
+      "test": "suspended session context absent",
+      "result": "PASS"
+    },
+    {
+      "test": "owner can reactivate permitted employee",
+      "result": "PASS"
+    },
+    {
+      "test": "owner action cannot target another organization",
+      "result": "PASS"
+    },
+    {
+      "test": "membership actions append audit and versions",
+      "result": "PASS"
+    },
+    {
+      "test": "last owner delete blocked even through local admin SQL",
+      "result": "PASS"
+    },
+    {
+      "test": "last owner disable blocked even through local admin SQL",
+      "result": "PASS"
+    },
+    {
+      "test": "last owner demote blocked even through local admin SQL",
+      "result": "PASS"
+    },
+    {
+      "test": "ownerless organization cannot commit",
+      "result": "PASS"
+    },
+    {
+      "test": "concurrent owner removals both fail and owner survives",
+      "result": "PASS"
+    },
+    {
+      "test": "concurrent privileged SQL cannot delete/demote last owner",
+      "result": "PASS"
+    },
+    {
+      "test": "ordinary user cannot update audit",
+      "result": "PASS"
+    },
+    {
+      "test": "ordinary user cannot delete audit",
+      "result": "PASS"
+    },
+    {
+      "test": "ordinary user cannot insert fake audit",
+      "result": "PASS"
+    },
+    {
+      "test": "audit immutable trigger blocks admin update",
+      "result": "PASS"
+    },
+    {
+      "test": "audit immutable trigger blocks truncate",
+      "result": "PASS"
+    },
+    {
+      "test": "business insert writes same-tenant audit",
+      "result": "PASS"
+    },
+    {
+      "test": "record organization cannot change",
+      "result": "PASS"
+    },
+    {
+      "test": "record creator cannot change",
+      "result": "PASS"
+    },
+    {
+      "test": "non-owner assignment escalation blocked",
+      "result": "PASS"
+    },
+    {
+      "test": "cross-tenant foreign key denied",
+      "result": "PASS"
+    },
+    {
+      "test": "referenced lead hard delete prevented by FK",
+      "result": "PASS"
+    },
+    {
+      "test": "ordinary hard delete denied",
+      "result": "PASS"
+    },
+    {
+      "test": "sales cannot smuggle archival through edit permission",
+      "result": "PASS"
+    },
+    {
+      "test": "owner archive preserves linked quote",
+      "result": "PASS"
+    },
+    {
+      "test": "archived relationship remains intact",
+      "result": "PASS"
+    },
+    {
+      "test": "override cannot grant owner-only permission",
+      "result": "PASS"
+    },
+    {
+      "test": "deny override removes row visibility",
+      "result": "PASS"
+    },
+    {
+      "test": "expired override returns inherited access",
+      "result": "PASS"
+    },
+    {
+      "test": "expired otherwise absent grant cannot escalate",
+      "result": "PASS"
+    },
+    {
+      "test": "own-scope override filters other creators",
+      "result": "PASS"
+    },
+    {
+      "test": "assigned-scope override filters other assignees",
+      "result": "PASS"
+    },
+    {
+      "test": "role deny wins over allow override",
+      "result": "PASS"
+    },
+    {
+      "test": "department scope permits matching assignee department",
+      "result": "PASS"
+    },
+    {
+      "test": "department scope excludes other departments",
+      "result": "PASS"
+    },
+    {
+      "test": "department scope cannot cross tenant boundary",
+      "result": "PASS"
+    },
+    {
+      "test": "custom role replaces template permission scope",
+      "result": "PASS"
+    },
+    {
+      "test": "custom role cannot grant owner-only team management",
+      "result": "PASS"
+    },
+    {
+      "test": "archived custom role fails closed",
+      "result": "PASS"
+    },
+    {
+      "test": "optional owner MFA denies AAL1 session",
+      "result": "PASS"
+    },
+    {
+      "test": "optional owner MFA admits AAL2 session",
+      "result": "PASS"
+    },
+    {
+      "test": "optional admin MFA denies AAL1 session",
+      "result": "PASS"
+    },
+    {
+      "test": "future table automatically enables and forces RLS",
+      "result": "PASS"
+    },
+    {
+      "test": "future table default grants deny authenticated",
+      "result": "PASS"
+    },
+    {
+      "test": "all proposed public tables enable and force RLS",
+      "result": "PASS"
+    },
+    {
+      "test": "two distinct verified owners cannot concurrently remove each other",
+      "result": "PASS"
+    }
+  ]
+}

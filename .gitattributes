@@ -1,0 +1,2 @@
+# Preserve the exact bytes of the Phase 2A validated SQL proposal.
+supabase/proposals/consolidated-initial.sql -text

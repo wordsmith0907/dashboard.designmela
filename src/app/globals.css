@@ -2179,3 +2179,16 @@ th,
   }
 }
  .access-role-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:16px; }
+
+/* Connected development screens share existing design tokens. */
+.connected-page{max-width:1200px;margin:0 auto;padding:24px}
+.connected-page header{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px}
+.connected-form{display:grid;gap:12px;max-width:600px;padding:18px 0}
+.connected-form label{display:grid;gap:6px}
+.connected-form input,.connected-form select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
+.connected-form input[type=checkbox]{width:auto}
+.connected-section{margin:28px 0}.connected-record{padding:20px;margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow-wrap:anywhere}
+.connected-record dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.connected-record dt{font-size:12px;color:var(--muted)}.connected-record dd{margin:0}
+.connected-page details{margin:12px 0}.connected-page summary{cursor:pointer}
+@media(max-width:650px){.connected-page{padding:16px}.connected-page .tabs{gap:6px}}

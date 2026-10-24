@@ -10,7 +10,7 @@ The dashboard has Today, CRM, Clients, Sales, Tasks, Projects, Audits, Content, 
 
 **Demo Mode** is the default. Records and the Owner identity are fictional. Data changes live only in the current browser tab and reset on reload. Use fictional information only. Saved CRM views store allowlisted non-sensitive filter preferences in localStorage; leads, notes, emails, phone numbers and authentication tokens are not stored there.
 
-`DESIGNMELA_MODE=connected` currently displays **Connection Error** because authentication and the Supabase provider are not implemented. Invalid mode values also fail closed. Supplying Supabase credentials does not enable persistence. There is no fake connected-mode success or silent fallback to demo records.
+`DESIGNMELA_MODE=connected` now has an opt-in development integration: verified cookie sessions, protected routes, server authorization, and basic paginated record operations. It additionally requires `DESIGNMELA_ENV=development`, `SUPABASE_DEV_PROJECT_CONFIRMED=true`, approved database setup and an organization ID. These flags have not been enabled locally. Invalid/incomplete configuration fails closed; no database failure falls back to demo records. See the [Phase 2 pre-migration report](docs/phase2-pre-migration.md) for the exact implemented subset, bootstrap and remaining blockers.
 
 ## Run and verify
 
@@ -42,16 +42,19 @@ Read [CRM instructions](docs/crm-v2.md). Imports parse locally in a worker with 
 
 ## Database and production status
 
-The CLI was initialized and linked during setup, but the application has no authenticated Supabase adapter. The single [consolidated SQL proposal](supabase/proposals/consolidated-initial.sql) is **unapplied and unverified in a database**. It replaces the obsolete separate drafts and is intentionally outside the automatic migrations directory. See [database security and approval requirements](docs/database-security.md).
+The CLI was initialized and linked during earlier setup. Phase 2 adds server-side Supabase adapters without activating them. The single [consolidated SQL proposal](supabase/proposals/consolidated-initial.sql) is **not applied remotely; validated in disposable local Supabase during Phase 2A**. It replaces the obsolete separate drafts and is intentionally outside the automatic migrations directory. See [database security and approval requirements](docs/database-security.md).
 
 `.env.example` contains placeholders only. `.env.local` is ignored by Git. `DATABASE_URL` and any service-role credentials are server-only. Public Supabase URL/publishable-key settings are not authorization. Local `supabase/config.toml` is not evidence of hosted production security settings. Never commit credentials.
 
-Before real client use: finish invite-only authentication, email verification, password policy, optional Owner/admin TOTP, server-enforced permissions, scoped RLS tests, transactional persistence, backups and recovery. Employee access and ownership-transfer flows remain incomplete. No migration, production user, invitation, website connection or deployment may run without explicit approval.
+Phase 2A validation requires `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, server-only `DATABASE_URL` and server-only `INITIAL_OWNER_EMAIL`. The publishable-key variable is the sole supported browser-key setting; a legacy anon key is not required. No service-role credential is required or added for remote read-only inspection or disposable local SQL validation. See the [Phase 2A validation report](docs/phase2a-validation.md).
+
+Before real client use: validate authentication and RLS in an approved disposable database, configure hosted email verification/password policy, finish invitation/reset flows, optional Owner/admin TOTP, transactional workflows, backups and recovery. Employee access and ownership-transfer flows remain incomplete. No migration, production user, invitation, website connection or deployment may run without explicit approval.
 
 Website event storage, n8n, external messaging, payments and social publishing are unconnected. `POST /api/website-events` validates requests but returns 503 for otherwise valid events because storage is absent. Publication actions record manual history only. No Instagram API or automatic social publishing is included.
 
 ## Reference
 
+- [Phase 2 pre-migration report](docs/phase2-pre-migration.md)
 - [Provider architecture](docs/data-provider.md)
 - [Current scope and remaining work](docs/consolidated-v2.md)
 - [Verification procedure](docs/verification.md)

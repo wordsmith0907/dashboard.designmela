@@ -4,10 +4,13 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+const workingTree = process.argv.includes('--working-tree');
 const staged = git('ls-files', '-z').split('\0').filter(Boolean);
 const untracked = git('ls-files', '--others', '--exclude-standard', '-z').split('\0').filter(Boolean);
 const differences = git('diff', '--name-only', '-z').split('\0').filter(Boolean);
-const intended = fs.readFileSync('docs/first-commit-files.txt', 'utf8').trim().split(/\r?\n/);
+const manifestArg = process.argv.find(arg => arg.startsWith('--manifest='));
+const manifestPath = manifestArg?.slice('--manifest='.length) ?? 'docs/first-commit-files.txt';
+const intended = fs.readFileSync(manifestPath, 'utf8').trim().split(/\r?\n/);
 const manifestMismatch = [...new Set([...staged,...intended])].filter(file => staged.includes(file) !== intended.includes(file));
 const findings = [];
 const needles = [];
@@ -46,7 +49,8 @@ function scan(file, body) {
     }
   });
 }
-for (const file of staged) scan(file, git('show', `:${file}`));
+const scanFiles = workingTree ? [...new Set([...staged,...untracked])].filter(file => fs.existsSync(file)) : staged;
+for (const file of scanFiles) scan(file, workingTree ? fs.readFileSync(file,'utf8') : git('show', `:${file}`));
 let assetCount = 0;
 function scanAssets(dir) {
   if (!fs.existsSync(dir)) return;
@@ -61,6 +65,6 @@ let envIgnored = false;
 try { git('check-ignore', '--quiet', '.env.local'); envIgnored = true; } catch {}
 const envStaged = staged.includes('.env.local');
 const generated = staged.filter(file => /^(node_modules|\.next|test-results|playwright-report|supabase\/\.temp)\//.test(file));
-const passed = !differences.length && !untracked.length && !manifestMismatch.length && !findings.length && !generated.length && envIgnored && !envStaged;
-console.log(JSON.stringify({result:passed?'PASS':'FAIL',stagedFiles:staged.length,manifestMismatch,workingTreeDifferences:differences,untracked,envIgnored,envStaged,generatedFiles:generated,browserAssetsScanned:assetCount,findings},null,2));
+const passed = (workingTree || (!differences.length && !untracked.length && !manifestMismatch.length)) && !findings.length && !generated.length && envIgnored && !envStaged;
+console.log(JSON.stringify({result:passed?'PASS':'FAIL',mode:workingTree?'working-tree':'staged',filesScanned:scanFiles.length,stagedFiles:staged.length,...(!workingTree ? {manifestMismatch,workingTreeDifferences:differences,untracked}:{}),envIgnored,envStaged,generatedFiles:generated,browserAssetsScanned:assetCount,findings},null,2));
 process.exitCode = passed ? 0 : 1;

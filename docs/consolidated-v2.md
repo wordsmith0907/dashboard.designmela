@@ -8,17 +8,17 @@ Work is on `designmela-crm-v2`. The consolidated brief is not fully implemented.
 - Safe import undo now preserves every supported lead relationship and shows deleted/preserved/skipped/failed outcomes. New direct lead-linked collections require a typed relationship decision.
 - A 54-permission vocabulary, seven immutable role templates and pure policy helpers for Deny/Allow precedence, expiry, membership status, organization, assignment and service/record restrictions.
 - Team & Access has a searchable local template inspector and explicit unconnected account/invitation/audit states. It does not authorize employee requests or impersonate accounts.
-- Explicit Demo Mode and a server-side Connection Error for unfinished Connected Mode or invalid settings. No silent fallback.
+- Explicit Demo Mode plus a gated development Connected Mode with login/logout, cookie sessions, server authorization, permission-aware routes and basic persistent record adapters. No flags have been enabled; invalid configuration and failed queries do not load demo records.
 
-## Prepared but unapplied
+## Validated locally; unapplied remotely
 
-One [consolidated SQL proposal](../supabase/proposals/consolidated-initial.sql) replaces the obsolete drafts. It proposes organization-scoped Owner-only business access, protected membership metadata and append-only history. Non-Owner business access is denied until granular policies are reviewed. No database was migrated. Local Auth settings are separate from hosted production settings; see [database-security.md](database-security.md).
+One [consolidated SQL proposal](../supabase/proposals/consolidated-initial.sql) replaces the obsolete drafts. It now proposes seeded roles/canonical capabilities, scoped employee RLS, protected membership metadata, append-only history, future-table RLS and an idempotent server-only initial Owner bootstrap. These passed disposable local database testing; see the [Phase 2A report](phase2a-validation.md). No remote database was migrated. Local Auth settings are separate from hosted production settings; see [database-security.md](database-security.md).
 
-Prior read-only CLI checks returned no migrations or user-table statistics. That is not a guarantee every schema is empty. Reinspect before applying anything; existing history would require additive migrations.
+Phase 2A read-only catalog inspection found no application objects, application migration history, identities or stored business data. Development dedication is user-confirmed. Reinspect before applying anything; existing history would require additive migrations.
 
 ## Remaining production requirements
 
-Authentication, cookie sessions, password reset, optional TOTP, verified invitations, Owner bootstrap, Supabase provider, validated server APIs, durable audit storage, employee RLS, service/record scopes, paginated queries and backups are incomplete. The SQL has not received executable RLS/concurrency tests. Data mapping, atomic imports/undo, quote/publication/conversion transactions and business CRUD auditing require completion.
+Phase 2 prepares authentication/cookie sessions, bootstrap, permission resolution, paginated server adapters and SQL business auditing. They remain unactivated remotely. RLS/concurrency/bootstrap were tested locally; end-to-end hosted authentication remains unverified. Password reset, optional TOTP, verified invitations, custom-role/override management, service restrictions, full data mapping, optimistic concurrency, backups, atomic imports/undo and quote/publication/conversion transactions remain incomplete. See the [pre-migration report](phase2-pre-migration.md) for exact boundaries.
 
 Unified tasks, richer project/audit details, complete global search/quick-add coverage, durable website analytics and real automation monitoring remain outstanding. Website events return 503 until storage is implemented. No external communication, social publication or payment collection is performed.
 
