@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "categories": {
+    "tables": true,
+    "columns": true,
+    "constraints": true,
+    "indexes": true,
+    "functions": true,
+    "triggers": true,
+    "policies": true,
+    "event_triggers": true,
+    "table_grants": true,
+    "function_grants": true,
+    "schema_grants": true,
+    "default_grants": true
+  },
+  "normalizations": {
+    "indexes": "Only fk_<digits> names generated from constraint OIDs by the reviewed SQL are normalized. Table, columns, order, uniqueness, validity, readiness and all other definition text are preserved.",
+    "functions": "Only CRLF-to-LF line endings are normalized; function text and security metadata remain otherwise exact."
+  },
+  "generated_fk_indexes": {
+    "local": 111,
+    "remote": 111
+  },
+  "local_snapshot_sha256": "7c44f54556c71a39bd38fa56cb14e940fd7ca231d4c85dd5ce0de8956656012a",
+  "remote_snapshot_sha256": "981159ebab9e0a5089d0a0fb82ac08dd39fbaa2fb61505ae1652ca22b0ff3f84",
+  "raw_comparison": "FAIL",
+  "no_remote_mutations": true
+}

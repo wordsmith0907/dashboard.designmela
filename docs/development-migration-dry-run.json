@@ -1,0 +1,8 @@
+{
+  "command": "npx supabase@2.122.0 db push --linked --skip-vault --dry-run",
+  "exit_code": 0,
+  "migration_files": [
+    "20261023000100_designmela_initial.sql"
+  ],
+  "output": "{\"upToDate\":false,\"dryRun\":true,\"migrations\":[\"20261023000100_designmela_initial.sql\"],\"seeds\":[],\"roles\":[],\"message\":\"Finished supabase db push.\"}\n\nDRY RUN: migrations will *not* be pushed to the database.\nConnecting to remote database...\nWould push these migrations:\n \u2022 20261023000100_designmela_initial.sql\n"
+}

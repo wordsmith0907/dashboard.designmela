@@ -1,0 +1,1157 @@
+{
+  "target_matches_prior_cached_identity": true,
+  "sql_sha256": "4d09aa7c75b03633eb4260c781b74e38808592d928201778228f89e66c68a203",
+  "inspection": [
+    {
+      "environment": {
+        "NEXT_PUBLIC_SUPABASE_URL": "present (masked)",
+        "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY": "present (masked)",
+        "DATABASE_URL": "present (masked)",
+        "INITIAL_OWNER_EMAIL": "present (masked)"
+      },
+      "env_ignored": true,
+      "env_tracked": false
+    },
+    {
+      "project": "[masked development project]",
+      "linked_identity_matches": true,
+      "connection_identity_matches": true,
+      "read_only_transaction_before_first_query": true
+    },
+    {
+      "schemas": [
+        {
+          "schema": "auth"
+        },
+        {
+          "schema": "extensions"
+        },
+        {
+          "schema": "graphql"
+        },
+        {
+          "schema": "graphql_public"
+        },
+        {
+          "schema": "pgbouncer"
+        },
+        {
+          "schema": "public"
+        },
+        {
+          "schema": "realtime"
+        },
+        {
+          "schema": "storage"
+        },
+        {
+          "schema": "vault"
+        }
+      ],
+      "table_inventory": [
+        {
+          "schema": "auth",
+          "name": "audit_log_entries",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "custom_oauth_providers",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "flow_state",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "identities",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "instances",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "mfa_amr_claims",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "mfa_challenges",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "mfa_factors",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "mfa_recovery_code_sets",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "mfa_recovery_codes",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "oauth_authorizations",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "oauth_client_states",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "oauth_clients",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "oauth_consents",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "one_time_tokens",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "refresh_tokens",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "saml_providers",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "saml_relay_states",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "schema_migrations",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": 82,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "scim_tokens",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "scim_users",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "sessions",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "sso_domains",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "sso_providers",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "users",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "webauthn_challenges",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "webauthn_credentials",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "pg_stat_statements",
+          "relkind": "v",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pg_stat_statements_info",
+          "relkind": "v",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": true
+        },
+        {
+          "schema": "realtime",
+          "name": "messages",
+          "relkind": "p",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "schema_migrations",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": 91,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "subscription",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "buckets",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "buckets_analytics",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "buckets_vectors",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "migrations",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": 74,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "objects",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "s3_multipart_uploads",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "s3_multipart_uploads_parts",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "vector_indexes",
+          "relkind": "r",
+          "rls": true,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": false
+        },
+        {
+          "schema": "vault",
+          "name": "decrypted_secrets",
+          "relkind": "v",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": true
+        },
+        {
+          "schema": "vault",
+          "name": "secrets",
+          "relkind": "r",
+          "rls": false,
+          "force_rls": false,
+          "approximate_rows": -1,
+          "extension_owned": true
+        }
+      ],
+      "unexpected_schemas": [],
+      "application_objects": []
+    },
+    {
+      "identity_storage_counts": {
+        "auth.users": 0,
+        "storage.objects": 0,
+        "storage.buckets": 0
+      }
+    },
+    {
+      "migration_versions": [],
+      "functions": [
+        {
+          "schema": "auth",
+          "name": "email",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "jwt",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "role",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "auth",
+          "name": "uid",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "armor",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "armor",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "crypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "dearmor",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "decrypt_iv",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "digest",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "digest",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "encrypt_iv",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "gen_random_bytes",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "gen_random_uuid",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "gen_salt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "gen_salt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "grant_pg_cron_access",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "grant_pg_graphql_access",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "grant_pg_net_access",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "hmac",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "hmac",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pg_stat_statements",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pg_stat_statements_info",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pg_stat_statements_reset",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_armor_headers",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_key_id",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_decrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_encrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_pub_encrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_decrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_decrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_encrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgp_sym_encrypt_bytea",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "pgrst_ddl_watch",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "pgrst_drop_watch",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "set_graphql_placeholder",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_generate_v1",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_generate_v1mc",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_generate_v3",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_generate_v4",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_generate_v5",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_nil",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_ns_dns",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_ns_oid",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_ns_url",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "extensions",
+          "name": "uuid_ns_x500",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "graphql_public",
+          "name": "graphql",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "pgbouncer",
+          "name": "get_auth",
+          "security_definer": true,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "apply_rls",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "authorize",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "broadcast_changes",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "build_prepared_statement_sql",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "cast",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "check_equality_op",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "check_equality_op",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "is_visible_through_filters",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "list_changes",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "list_changes_sync",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "quote_wal2json",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "send",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "send_binary",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "settled_changes",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "subscription_check_filters",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "to_regrole",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "topic",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "realtime",
+          "name": "wal2json_escape_identifier",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "allow_any_operation",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "allow_only_operation",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "can_insert_object",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "enforce_bucket_lifecycle_service_role",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "enforce_bucket_name_length",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "extension",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "filename",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "foldername",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "get_common_prefix",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "get_size_by_bucket",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "list_multipart_uploads_with_delimiter",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "list_objects_with_delimiter",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "operation",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "protect_bucket_control_columns",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "protect_delete",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "search",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "search_by_timestamp",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "search_v2",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "storage",
+          "name": "update_updated_at_column",
+          "security_definer": false,
+          "extension_owned": false
+        },
+        {
+          "schema": "vault",
+          "name": "_crypto_aead_det_decrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "vault",
+          "name": "_crypto_aead_det_encrypt",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "vault",
+          "name": "_crypto_aead_det_noncegen",
+          "security_definer": false,
+          "extension_owned": true
+        },
+        {
+          "schema": "vault",
+          "name": "create_secret",
+          "security_definer": true,
+          "extension_owned": true
+        },
+        {
+          "schema": "vault",
+          "name": "update_secret",
+          "security_definer": true,
+          "extension_owned": true
+        }
+      ],
+      "triggers": [
+        {
+          "schema": "realtime",
+          "table": "subscription",
+          "trigger": "tr_check_filters"
+        },
+        {
+          "schema": "storage",
+          "table": "buckets",
+          "trigger": "enforce_bucket_name_length_trigger"
+        },
+        {
+          "schema": "storage",
+          "table": "buckets",
+          "trigger": "protect_bucket_control_insert"
+        },
+        {
+          "schema": "storage",
+          "table": "buckets",
+          "trigger": "protect_bucket_control_update"
+        },
+        {
+          "schema": "storage",
+          "table": "buckets",
+          "trigger": "protect_bucket_control_update_role"
+        },
+        {
+          "schema": "storage",
+          "table": "buckets",
+          "trigger": "protect_buckets_delete"
+        },
+        {
+          "schema": "storage",
+          "table": "objects",
+          "trigger": "protect_objects_delete"
+        },
+        {
+          "schema": "storage",
+          "table": "objects",
+          "trigger": "update_objects_updated_at"
+        }
+      ],
+      "policies": [],
+      "event_triggers": [
+        {
+          "evtname": "issue_graphql_placeholder",
+          "evtevent": "sql_drop",
+          "evtenabled": "O"
+        },
+        {
+          "evtname": "issue_pg_cron_access",
+          "evtevent": "ddl_command_end",
+          "evtenabled": "O"
+        },
+        {
+          "evtname": "issue_pg_graphql_access",
+          "evtevent": "ddl_command_end",
+          "evtenabled": "O"
+        },
+        {
+          "evtname": "issue_pg_net_access",
+          "evtevent": "ddl_command_end",
+          "evtenabled": "O"
+        },
+        {
+          "evtname": "pgrst_ddl_watch",
+          "evtevent": "ddl_command_end",
+          "evtenabled": "O"
+        },
+        {
+          "evtname": "pgrst_drop_watch",
+          "evtevent": "sql_drop",
+          "evtenabled": "O"
+        }
+      ]
+    },
+    {
+      "result": "PASS_READONLY",
+      "empty_application_schema": true,
+      "dedicated_development": "User-confirmed; project purpose cannot be proven from empty catalogs alone."
+    }
+  ],
+  "exact_data_counts": {
+    "auth.users": 0,
+    "storage.objects": 0,
+    "storage.buckets": 0,
+    "storage.buckets_analytics": 0,
+    "storage.buckets_vectors": 0,
+    "storage.vector_indexes": 0,
+    "vault.secrets": 0,
+    "realtime.messages": 0,
+    "realtime.subscription": 0
+  },
+  "result": "PASS"
+}

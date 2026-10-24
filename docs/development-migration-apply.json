@@ -1,0 +1,8 @@
+{
+  "command": "npx supabase@2.122.0 db push --linked --skip-vault",
+  "exit_code": 0,
+  "migration_files": [
+    "20261023000100_designmela_initial.sql"
+  ],
+  "output": "{\"upToDate\":false,\"dryRun\":false,\"migrations\":[\"20261023000100_designmela_initial.sql\"],\"seeds\":[],\"roles\":[],\"message\":\"Finished supabase db push.\"}\n\nConnecting to remote database...\nApplying migration 20261023000100_designmela_initial.sql...\n"
+}

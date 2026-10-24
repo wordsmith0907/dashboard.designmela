@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "schemas": [
+    "auth",
+    "extensions",
+    "graphql",
+    "graphql_public",
+    "pgbouncer",
+    "private",
+    "public",
+    "realtime",
+    "storage",
+    "supabase_migrations",
+    "vault"
+  ],
+  "added_application_tables": 34,
+  "cli_metadata_tables": [
+    [
+      "supabase_migrations",
+      "schema_migrations"
+    ]
+  ],
+  "missing_preexisting_tables": [],
+  "platform_data_counts": {
+    "auth.users": 0,
+    "storage.objects": 0,
+    "storage.buckets": 0,
+    "storage.buckets_analytics": 0,
+    "storage.buckets_vectors": 0,
+    "storage.vector_indexes": 0,
+    "vault.secrets": 0,
+    "realtime.messages": 0,
+    "realtime.subscription": 0
+  },
+  "seed_history_rows": 0,
+  "transaction_read_only": "on"
+}

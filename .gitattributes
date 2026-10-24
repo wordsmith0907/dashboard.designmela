@@ -1,2 +1,3 @@
 # Preserve the exact bytes of the Phase 2A validated SQL proposal.
 supabase/proposals/consolidated-initial.sql -text
+supabase/migrations/20261023000100_designmela_initial.sql -text
