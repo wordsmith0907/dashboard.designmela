@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "layer": "hosted PostgreSQL authenticated-role/RLS, not HTTP login",
+  "checks": [
+    "Owner workspace RPC: 22 permissions, 7 predefined roles",
+    "Anonymous/nonmember isolation, protected Owner/templates/history, public bootstrap denied",
+    "Committed lead create/edit/read across connections; nonmember read and hard DELETE denied",
+    "Fixture archived; zero active fixture rows, one archived row, three immutable audit entries"
+  ],
+  "active_fixture_rows": 0,
+  "archived_fixture_rows": 1,
+  "fixture_audit_entries": 3,
+  "auth_users_created": 0,
+  "hard_deletions": 0,
+  "identifiers": "withheld"
+}

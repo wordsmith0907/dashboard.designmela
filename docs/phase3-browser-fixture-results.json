@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "operation": "read-only management API browser fixture verification",
+  "fixture_rows": 1,
+  "archived_rows": 1,
+  "active_rows": 0,
+  "audit_entries": 3,
+  "identifiers": "withheld"
+}

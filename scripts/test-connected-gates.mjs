@@ -17,7 +17,7 @@ const child=spawn(process.execPath,['--require','./scripts/local-network-only.cj
   env:{...process.env,DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'development',SUPABASE_DEV_PROJECT_CONFIRMED:'true',
     DESIGNMELA_ORGANIZATION_ID:'00000000-0000-4000-8000-000000000001',
     NEXT_PUBLIC_SUPABASE_URL:`http://127.0.0.1:${stubPort}`,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_local_test_fixture',
-    INITIAL_OWNER_BOOTSTRAP_ENABLED:'false',INITIAL_OWNER_EMAIL:'',SUPABASE_SERVICE_ROLE_KEY:''},
+    INITIAL_OWNER_BOOTSTRAP_ENABLED:'false',INITIAL_OWNER_EMAIL:''},
   stdio:['ignore','ignore','ignore','ipc'],
 });
 let blocked=0;
@@ -33,7 +33,8 @@ try {
   assert.match(login.headers.get('cache-control'),/no-store/);
   const page=await browser.newPage({extraHTTPHeaders:{'x-user-role':'owner','x-organization-id':'spoofed','x-permissions':'team.manage'}});
   await page.route('**/*',route => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort());
-  for(const path of ['/','/crm','/clients','/projects','/tasks','/sales','/team','/settings','/setup']) {
+  const protectedPaths=['/','/crm','/clients','/projects','/tasks','/sales','/analytics','/audits','/content','/posted','/automations','/team','/settings','/setup','/reset-password','/access-pending','/unauthorized'];
+  for(const path of protectedPaths) {
     await page.goto(base+path);
     // App Router may use a streamed redirect after sending the loading shell.
     await page.waitForURL(base+'/login');
@@ -41,7 +42,7 @@ try {
     assert.doesNotMatch(body,/Good relationships|Today’s focus/,'Protected response must not contain demo data');
   }
   assert.equal(blocked,0,'No external auth request should be attempted without a session');
-  console.log(JSON.stringify({result:'PASS',protectedRoutes:9,spoofedHeadersIgnored:true,localAuthStubRequests:requests,remoteRequests:0}));
+  console.log(JSON.stringify({result:'PASS',protectedRoutes:protectedPaths.length,spoofedHeadersIgnored:true,localAuthStubRequests:requests,remoteRequests:0}));
 } finally {
   await browser.close();
   child.kill();

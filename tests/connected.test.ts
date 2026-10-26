@@ -32,6 +32,8 @@ test('Navigation and direct-route permission decisions deny unknown and unauthor
   assert.equal(canAccessRoute(session,'/crm'),true);
   assert.equal(canAccessRoute(session,'/team'),false);
   assert.equal(canAccessRoute(session,'/settings'),false);
+  assert.equal(canAccessRoute(session,'/audits'),false);
+  assert.equal(canAccessRoute({...session,permissions:['audit.view']},'/audits'),true);
   assert.equal(canAccessRoute(session,'/unregistered'),false);
   for (const route of routes.filter(r => r.permission)) assert.equal(canAccessRoute({...session,permissions:[]},route.path),false);
   // Displayed role never grants capabilities; only the database-resolved keys do.

@@ -1,0 +1,27 @@
+{
+  "settings": {
+    "site_url": "http://127.0.0.1:3100",
+    "uri_allow_list": "http://127.0.0.1:3100/auth/callback?next=/reset-password,http://127.0.0.1:3100/**",
+    "disable_signup": true,
+    "external_email_enabled": true,
+    "mailer_autoconfirm": false,
+    "password_min_length": 12,
+    "external_anonymous_users_enabled": false,
+    "refresh_token_rotation_enabled": true
+  },
+  "password_character_classes_required": true,
+  "social_providers_enabled": [],
+  "configuration_result": "PASS",
+  "invitation_result": "Owner personally verified; initial automated attempt was HTTP 401",
+  "verified_owner_accounts": 1,
+  "bootstrap_result": "PASS",
+  "hosted_database_verification": "PASS",
+  "hosted_browser_verification": "PENDING_PERSONAL_ACCOUNT_RECOVERY",
+  "service_role_key_added": false,
+  "private_email_opened": false,
+  "verification_link_opened": false,
+  "password_handled": false,
+  "local_activation_url": "http://127.0.0.1:3100/auth/activate",
+  "browser_auth_checks": 18,
+  "protected_routes": 17
+}

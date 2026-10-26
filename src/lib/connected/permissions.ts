@@ -10,7 +10,7 @@ export const routes: { path: string; label: string; permission?: Permission }[] 
   {path:'/',label:'Today'}, {path:'/crm',label:'CRM',permission:'leads.view'},
   {path:'/clients',label:'Clients',permission:'clients.view'}, {path:'/projects',label:'Projects',permission:'projects.view'},
   {path:'/tasks',label:'Tasks',permission:'tasks.view'}, {path:'/sales',label:'Sales',permission:'sales.view'},
-  {path:'/analytics',label:'Analytics',permission:'analytics.view'}, {path:'/audits',label:'Audits',permission:'leads.view'},
+  {path:'/analytics',label:'Analytics',permission:'analytics.view'}, {path:'/audits',label:'Audits',permission:'audit.view'},
   {path:'/content',label:'Content',permission:'content.view'}, {path:'/posted',label:'Posted',permission:'content.view'},
   {path:'/automations',label:'Automations',permission:'automations.view'}, {path:'/team',label:'Team & Access',permission:'team.view'},
   {path:'/settings',label:'Settings',permission:'settings.manage'},
