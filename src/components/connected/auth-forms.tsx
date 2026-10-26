@@ -46,7 +46,7 @@ export function ConfirmEmailForm({tokenHash,type,next}:{tokenHash:string;type:st
     <input type="hidden" name="token_hash" value={tokenHash}/><input type="hidden" name="type" value={type}/><input type="hidden" name="next" value={next}/>
     <p>Continue only if you requested this email or expected an invitation.</p><Submit pending={pending} seconds={seconds} label="Continue securely"/></form>;
 }
-export function ActivationForm({verified=false}:{verified?:boolean}) {
+export function ActivationForm({verified=false,showDiagnostics=false}:{verified?:boolean;showDiagnostics?:boolean}) {
   const link=useRef<URLSearchParams | null>(null);
   const [presence,setPresence]=useState<{code:boolean;token_hash:boolean;type:boolean;fragment:boolean;error:boolean} | null>(null);
   useEffect(()=>{
@@ -76,8 +76,8 @@ export function ActivationForm({verified=false}:{verified?:boolean}) {
     {presence.error ? <p role="alert">The email provider rejected this link. It may have expired or already been used. Request a fresh link.</p> :
       ready ? <Submit pending={pending} seconds={seconds} label="Continue securely"/> :
         <p role="alert">No activation credentials arrived. Open a fresh invitation link from your email. Reloading a previously opened link cannot restore its credentials.</p>}
-    <details><summary>Link diagnostics (presence only)</summary>
+    {showDiagnostics && <details><summary>Link diagnostics (presence only)</summary>
       <p>code: {String(presence.code)}; token_hash: {String(presence.token_hash)}; type: {String(presence.type)}; authentication fragment: {String(presence.fragment)}; provider error: {String(presence.error)}</p>
-    </details>
+    </details>}
   </form>;
 }

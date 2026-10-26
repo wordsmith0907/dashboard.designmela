@@ -1,8 +1,10 @@
 'use server';
 import { redirect } from 'next/navigation';
+import { connectedConfig } from '@/lib/server-config';
+import { authUrls } from '@/lib/runtime-config';
 import { serverClient } from '@/lib/supabase/server';
 import { bootstrapAllowed } from '@/lib/connected/config';
-import { appOrigin, authFailure, confirmationType, passwordGuidance, safeNext, validEmail, validNewPassword, validTokenHash, type AuthResult } from '@/lib/auth/policy';
+import { authFailure, confirmationType, passwordGuidance, safeNext, validEmail, validNewPassword, validTokenHash, type AuthResult } from '@/lib/auth/policy';
 
 export async function requestReset(_previous:AuthResult, form:FormData):Promise<AuthResult> {
   const email = String(form.get('email') ?? '').trim();
@@ -10,7 +12,7 @@ export async function requestReset(_previous:AuthResult, form:FormData):Promise<
   try {
     const client = await serverClient();
     const {error} = await client.auth.resetPasswordForEmail(email, {
-      redirectTo:`${appOrigin(process.env.DESIGNMELA_APP_ORIGIN)}/auth/callback?next=/reset-password`,
+      redirectTo:authUrls(connectedConfig()).recovery,
     });
     if (error?.status === 429 || error?.code === 'over_email_send_rate_limit') return authFailure(error);
     if (error && (!error.status || error.status >= 500)) return {message:'Email delivery is unavailable. Please wait before trying again.',retryAfter:60};
@@ -59,7 +61,7 @@ export async function updatePassword(_previous:AuthResult,form:FormData):Promise
     const client = await serverClient();
     const {data,error} = await client.auth.getUser();
     if (error || !data.user?.email_confirmed_at) return {message:'Your verified session has expired. Open a new invitation or reset link.'};
-    initialOwner = bootstrapAllowed(data.user,process.env.INITIAL_OWNER_EMAIL,process.env.INITIAL_OWNER_BOOTSTRAP_ENABLED);
+    initialOwner = connectedConfig().bootstrapEnabled && bootstrapAllowed(data.user,process.env.INITIAL_OWNER_EMAIL,process.env.INITIAL_OWNER_BOOTSTRAP_ENABLED);
     const result = await client.auth.updateUser({password});
     if (result.error) {
       if (result.error.status === 429) return authFailure(result.error);

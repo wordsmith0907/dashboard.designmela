@@ -1,15 +1,17 @@
 import test from 'node:test';
+import { validatedOrigin } from '../src/lib/runtime-config';
 import assert from 'node:assert/strict';
-import { appOrigin, authCookieOptions, authFailure, confirmationType, safeNext, validEmail, validNewPassword, validTokenHash } from '../src/lib/auth/policy';
+import { authCookieOptions, authFailure, confirmationType, safeNext, validEmail, validNewPassword, validTokenHash } from '../src/lib/auth/policy';
 
 test('Auth redirects accept only exact workspace destinations',()=>{
   for (const value of ['https://evil.invalid','//evil.invalid','/\\evil.invalid','/%2f%2fevil.invalid','/crm?next=https://evil.invalid','/auth/callback','javascript:alert(1)','/crm\r\nLocation: https://evil.invalid',null,['/crm']]) assert.equal(safeNext(value),'/');
   for (const value of ['/crm','/setup','/reset-password','/']) assert.equal(safeNext(value),value);
 });
 test('Email links use configured origins and reject credentials, paths and unsafe protocols',()=>{
-  assert.equal(appOrigin(),'http://127.0.0.1:3100');
-  assert.equal(appOrigin('https://workspace.example.invalid'),'https://workspace.example.invalid');
-  for (const value of ['https://name:secret@example.invalid','http://example.invalid','https://example.invalid/path','https://example.invalid?next=evil','javascript:alert(1)']) assert.throws(()=>appOrigin(value));
+  assert.throws(()=>validatedOrigin(undefined));
+  assert.equal(validatedOrigin('http://127.0.0.1:3100',true),'http://127.0.0.1:3100');
+  assert.equal(validatedOrigin('https://workspace.example.invalid'),'https://workspace.example.invalid');
+  for (const value of ['https://name:secret@example.invalid','http://example.invalid','https://example.invalid/path','https://example.invalid?next=evil','javascript:alert(1)']) assert.throws(()=>validatedOrigin(value));
 });
 test('Password and email validation enforce stated requirements without trimming passwords',()=>{
   for (const value of ['Short1!','abcdefghijklmnop','ABCDEFGHIJKLMNOP','1234567890123456','ValidButNoNumber!']) assert.equal(validNewPassword(value),false);

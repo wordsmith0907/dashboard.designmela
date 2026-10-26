@@ -6,6 +6,9 @@ import {setTimeout as delay} from 'node:timers/promises';
 import assert from 'node:assert/strict';
 import {chromium} from '@playwright/test';
 
+const runtime=process.argv[2] ?? 'development';
+assert.ok(['development','preview','production'].includes(runtime));
+const hosted=runtime!=='development';
 const userId='00000000-0000-4000-8000-000000000002';
 const org='00000000-0000-4000-8000-000000000001';
 const member='00000000-0000-4000-8000-000000000003';
@@ -35,7 +38,7 @@ const stub=createServer(async(req,res)=>{
   if(path==='/auth/v1/user' && req.method==='GET') return reply(200,user());
   if(path==='/auth/v1/user' && req.method==='PUT') {updated=true;return reply(200,user());}
   if(path==='/auth/v1/logout') {globalSignout ||= req.url.includes('scope=global');return reply(200,{});}
-  if(path==='/auth/v1/recover') {resetCalls++;return reply(200,{});}
+  if(path==='/auth/v1/recover') {assert.equal(new URL(req.url,'http://localhost').searchParams.get('redirect_to'),base+'/auth/callback?next=/reset-password');resetCalls++;return reply(200,{});}
   if(path==='/auth/v1/verify') {verificationCalls++;if(body.token_hash==='x'.repeat(64)) return reply(403,{code:'otp_expired',msg:'Synthetic provider detail'});return reply(200,session());}
   if(path==='/rest/v1/rpc/workspace_session') {
     if(mode==='db-error') return reply(503,{message:'Synthetic private database detail'});
@@ -47,10 +50,11 @@ const stub=createServer(async(req,res)=>{
 await new Promise(resolve=>stub.listen(0,'127.0.0.1',resolve));
 const stubPort=stub.address().port;
 const reservation=createServer();await new Promise(resolve=>reservation.listen(0,'127.0.0.1',resolve));const port=reservation.address().port;await new Promise(resolve=>reservation.close(resolve));
-const base=`http://127.0.0.1:${port}`;
+const transport=`http://127.0.0.1:${port}`;
+const base=runtime==='production'?'https://dashboard.designmela.com':runtime==='preview'?'https://crm-test-git-review.vercel.app':transport;
 const child=spawn(process.execPath,['--require','./scripts/local-network-only.cjs','node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{
-  env:{...process.env,TEST_AUTH_ORIGIN:`http://127.0.0.1:${stubPort}`,DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'development',SUPABASE_DEV_PROJECT_CONFIRMED:'true',DESIGNMELA_ORGANIZATION_ID:org,DESIGNMELA_APP_ORIGIN:base,
-    NEXT_PUBLIC_SUPABASE_URL:`http://127.0.0.1:${stubPort}`,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_local_test_fixture',INITIAL_OWNER_EMAIL:email,INITIAL_OWNER_BOOTSTRAP_ENABLED:'true'},
+  env:{...process.env,TEST_AUTH_ORIGIN:`http://127.0.0.1:${stubPort}`,DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:runtime,VERCEL_ENV:hosted?runtime:'',VERCEL:hosted?'1':'',VERCEL_BRANCH_URL:'crm-test-git-review.vercel.app',SUPABASE_DEV_PROJECT_CONFIRMED:runtime==='production'?'false':'true',DESIGNMELA_ORGANIZATION_ID:org,DESIGNMELA_APP_ORIGIN:hosted?'':base,NEXT_PUBLIC_APP_URL:base,
+    NEXT_PUBLIC_SUPABASE_URL:hosted?'https://fixture.supabase.co':`http://127.0.0.1:${stubPort}`,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_local_test_fixture',INITIAL_OWNER_EMAIL:email,INITIAL_OWNER_BOOTSTRAP_ENABLED:hosted?'false':'true'},
   stdio:['ignore','pipe','pipe','ipc'],
 });
 let serverOutput='';
@@ -61,18 +65,25 @@ const browser=await chromium.launch({channel:'chrome'});
 const results=[];
 async function check(name,fn){try{await fn();}catch(error){console.log(JSON.stringify({failedCheck:name,stubCalls:calls,blockedExternalRequests:external}));throw error;}results.push(name);console.log(`PASS ${name}`);}
 try {
-  let ready=false;for(let i=0;i<150;i++){try{if((await fetch(base+'/login')).ok){ready=true;break;}}catch{}await delay(200);}assert.ok(ready,'App did not start');
+  let ready=false;for(let i=0;i<150;i++){try{if((await fetch(transport+'/login')).ok){ready=true;break;}}catch{}await delay(200);}assert.ok(ready,'App did not start');
   const context=await browser.newContext();
-  await context.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
+  await context.route('**/*',async route=>{
+    const url=new URL(route.request().url());
+    if(url.origin!==base) return route.abort();
+    if(!hosted) return route.continue();
+    const response=await route.fetch({url:transport+url.pathname+url.search,maxRedirects:0,headers:{...route.request().headers(),host:url.host,'x-forwarded-host':url.host}});
+    await route.fulfill({response});
+  });
   const page=await context.newPage();
   page.on('pageerror',()=>console.log('Browser error; details suppressed'));
   const login=async(next='/',address=email)=>{await page.goto(base+'/login?next='+encodeURIComponent(next));await page.getByLabel('Email',{exact:true}).fill(address);await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:true}).click();};
   await check('throttled login is sanitized and does not auto-retry',async()=>{await login('/','rate@example.invalid');await page.getByRole('alert').filter({hasText:'Too many attempts'}).waitFor();await page.getByRole('button',{name:/Try again in/}).waitFor();const count=attempts;await delay(1000);assert.equal(attempts,count);assert.ok(!(await page.content()).includes('Synthetic provider detail'));});
   await check('rejected credentials explain recovery without provider details',async()=>{await login('/','invalid@example.invalid');await page.getByRole('alert').filter({hasText:'email or password was not accepted'}).waitFor();assert.ok(!(await page.content()).includes('Synthetic provider detail'));});
   await check('unverified login explains verification',async()=>{await login('/','unverified@example.invalid');await page.getByRole('alert').filter({hasText:'Verify your email'}).waitFor();});
-  await check('verified account without membership is Access Pending; cookie is HTTP-only',async()=>{await login('//evil.invalid');await page.waitForURL(base+'/access-pending');await page.getByRole('heading',{name:'Access pending',exact:true}).waitFor();const cookies=await context.cookies();assert.ok(cookies.some(c=>c.name.startsWith('sb-')&&c.httpOnly&&c.sameSite==='Lax'));assert.ok(!(await page.evaluate(()=>document.cookie)).includes('sb-'));});
-  await check('matching initial Owner is verified without bootstrap',async()=>{await page.goto(base+'/setup');await page.getByRole('heading',{name:'Owner account verified'}).waitFor();assert.ok(!calls.some(([,path])=>path.includes('bootstrap_first_owner')));});
+  await check('verified account without membership is Access Pending; cookie is HTTP-only',async()=>{await login('//evil.invalid');await page.waitForURL(base+'/access-pending');await page.getByRole('heading',{name:'Access pending',exact:true}).waitFor();const cookies=await context.cookies();assert.ok(cookies.some(c=>c.name.startsWith('sb-')&&c.httpOnly&&c.sameSite==='Lax'&&c.secure===hosted));assert.ok(!(await page.evaluate(()=>document.cookie)).includes('sb-'));});
+  if(!hosted) await check('matching initial Owner is verified without bootstrap',async()=>{await page.goto(base+'/setup');await page.getByRole('heading',{name:'Owner account verified'}).waitFor();assert.ok(!calls.some(([,path])=>path.includes('bootstrap_first_owner')));});
   await check('Owner navigation, refresh and protected module access',async()=>{mode='active';await page.goto(base+'/crm');await page.getByRole('heading',{name:'CRM',exact:true}).waitFor();await page.getByRole('link',{name:'Team & Access',exact:true}).waitFor();await page.reload();await page.getByRole('heading',{name:'CRM',exact:true}).waitFor();});
+  if(hosted) await check('hosted UI omits development and setup diagnostics',async()=>{assert.doesNotMatch(await page.locator('body').innerText(),/Development|Demo Mode|localhost|127\.0\.0\.1/);await page.goto(base+'/setup');assert.equal(await page.getByRole('heading',{name:'Owner account verified'}).count(),0);});
   await check('direct URL and navigation enforce server permissions',async()=>{mode='restricted';await page.goto(base+'/crm');assert.equal(await page.getByRole('link',{name:'Team & Access',exact:true}).count(),0);await page.goto(base+'/team');await page.getByRole('heading',{name:'This page is not in your workspace.',exact:true}).waitFor();assert.equal(await page.getByRole('heading',{name:'Team & Access',exact:true}).count(),0);});
   await check('database error stays in Connected Mode and fails closed',async()=>{mode='db-error';await page.goto(base+'/crm');await page.waitForURL(base+'/auth/unavailable');await page.getByRole('heading',{name:'Workspace temporarily unavailable'}).waitFor();assert.ok(!(await page.content()).includes('Demo data'));mode='active';});
   await check('logout removes browser access; protected URLs redirect',async()=>{await page.goto(base+'/');await page.getByRole('button',{name:'Sign out',exact:true}).click();await page.waitForURL(/\/login\?status=signed-out$/);await page.goto(base+'/crm');await page.waitForURL(base+'/login');});
@@ -108,12 +119,23 @@ try {
     await page.getByLabel('New password',{exact:true}).waitFor();await page.waitForURL(base+'/auth/activate');
     await context.clearCookies();
   });
-  await check('initial Owner activation preserves current session and proceeds directly to setup',async()=>{await page.goto(base+'/auth/activate#'+new URLSearchParams({type:'invite',access_token:token(),refresh_token:randomBytes(32).toString('hex')}));await page.getByRole('button',{name:'Continue securely'}).waitFor();assert.equal(new URL(page.url()).hash,'');assert.equal(await page.evaluate(()=>localStorage.length),0);await page.getByRole('button',{name:'Continue securely'}).click();await page.waitForURL(base+'/auth/activate');await page.getByLabel('New password',{exact:true}).fill(password);await page.getByLabel('Confirm new password',{exact:true}).fill(password);await page.getByRole('button',{name:'Save password'}).click();await page.waitForURL(base+'/setup');await page.getByRole('heading',{name:'Owner account verified'}).waitFor();assert.ok(updated&&!globalSignout);assert.ok(calls.some(([method,path])=>method==='POST'&&path==='/auth/v1/logout'));});
+  if(!hosted) await check('initial Owner activation preserves current session and proceeds directly to setup',async()=>{await page.goto(base+'/auth/activate#'+new URLSearchParams({type:'invite',access_token:token(),refresh_token:randomBytes(32).toString('hex')}));await page.getByRole('button',{name:'Continue securely'}).waitFor();assert.equal(new URL(page.url()).hash,'');assert.equal(await page.evaluate(()=>localStorage.length),0);await page.getByRole('button',{name:'Continue securely'}).click();await page.waitForURL(base+'/auth/activate');await page.getByLabel('New password',{exact:true}).fill(password);await page.getByLabel('Confirm new password',{exact:true}).fill(password);await page.getByRole('button',{name:'Save password'}).click();await page.waitForURL(base+'/setup');await page.getByRole('heading',{name:'Owner account verified'}).waitFor();assert.ok(updated&&!globalSignout);assert.ok(calls.some(([method,path])=>method==='POST'&&path==='/auth/v1/logout'));});
+  if(hosted) await check('hosted fragment activation uses secure session without diagnostics or bootstrap',async()=>{
+    await context.clearCookies();
+    await page.goto(base+'/auth/activate#'+new URLSearchParams({type:'invite',access_token:token(),refresh_token:randomBytes(32).toString('hex')}));
+    await page.getByRole('button',{name:'Continue securely'}).waitFor();
+    assert.equal(new URL(page.url()).hash,'');
+    assert.equal(await page.getByText('Link diagnostics (presence only)',{exact:true}).count(),0);
+    await page.getByRole('button',{name:'Continue securely'}).click();
+    await page.getByLabel('New password',{exact:true}).waitFor();
+    assert.ok((await context.cookies()).some(c=>c.name.startsWith('sb-')&&c.httpOnly&&c.secure));
+    assert.ok(!calls.some(([,path])=>path.includes('bootstrap_first_owner')));
+  });
   await check('ordinary recovery revokes all sessions and requires fresh login',async()=>{currentEmail='member@example.invalid';updated=false;await page.goto(base+'/auth/confirm?type=recovery&token_hash='+('b'.repeat(64)));await page.getByRole('button',{name:'Continue securely'}).click();await page.waitForURL(base+'/reset-password');await page.getByLabel('New password',{exact:true}).fill(password);await page.getByLabel('Confirm new password',{exact:true}).fill(password);await page.getByRole('button',{name:'Save password'}).click();await page.waitForURL(base+'/login?status=password-updated');assert.ok(updated&&globalSignout);});
-  await check('callback rejects open redirects and uses no-store/no-referrer',async()=>{const response=await fetch(base+'/auth/callback?next=https://evil.invalid',{redirect:'manual',headers:{'x-forwarded-host':'evil.invalid'}});assert.equal(response.headers.get('location'),base+'/auth/link-error');assert.match(response.headers.get('cache-control'),/no-store/);assert.equal(response.headers.get('referrer-policy'),'no-referrer');});
+  await check('callback rejects open redirects and uses no-store/no-referrer',async()=>{const response=await fetch(transport+'/auth/callback?next=https://evil.invalid',{redirect:'manual',headers:{'x-forwarded-host':'evil.invalid'}});assert.equal(response.headers.get('location'),base+'/auth/link-error');assert.match(response.headers.get('cache-control'),/no-store/);assert.equal(response.headers.get('referrer-policy'),'no-referrer');});
   for (const secret of ['x'.repeat(64),'b'.repeat(64),'c'.repeat(40),'d'.repeat(40),password,'PRIVATE_PROVIDER_DETAIL']) assert.ok(!serverOutput.includes(secret),'Sensitive synthetic value reached server logs');
   assert.equal(external,0);assert.ok(!calls.some(([,path])=>path.includes('/signup')));
-  console.log(JSON.stringify({result:'PASS',checks:results.length,remoteRequests:external,hostedAccountsCreated:0,publicSignupRequests:0}));
+  console.log(JSON.stringify({result:'PASS',runtime,checks:results.length,remoteRequests:external,hostedAccountsCreated:0,publicSignupRequests:0}));
 } finally {
   await browser.close();child.kill();await new Promise(resolve=>child.once('exit',resolve));await new Promise(resolve=>stub.close(resolve));
 }

@@ -5,14 +5,13 @@ import { connectedEnabled,publicConfig,bootstrapAllowed } from '../src/lib/conne
 import { canAccessRoute,routes,permissionKeys,type WorkspaceSession } from '../src/lib/connected/permissions';
 import { recordModule,recordValues,pageNumber } from '../src/lib/connected/records';
 
-test('Connected Mode requires explicit development confirmation; invalid modes never fall back', () => {
-  assert.equal(connectedEnabled({}),false);
-  assert.equal(connectedEnabled({DESIGNMELA_MODE:'demo'}),false);
-  assert.throws(() => connectedEnabled({DESIGNMELA_MODE:'connected'}));
-  assert.throws(() => connectedEnabled({DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'production',SUPABASE_DEV_PROJECT_CONFIRMED:'true'}));
-  assert.throws(() => connectedEnabled({DESIGNMELA_MODE:'conected'}));
-  assert.equal(connectedEnabled({DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'development',SUPABASE_DEV_PROJECT_CONFIRMED:'true'}),true);
+test('Connected Mode fails closed without complete configuration', () => {
+  assert.throws(() => connectedEnabled({}));
+  assert.throws(() => connectedEnabled({DESIGNMELA_MODE:'demo'}));
+  assert.throws(() => connectedEnabled({DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'production'}));
+  assert.equal(connectedEnabled({DESIGNMELA_MODE:'demo',DESIGNMELA_ENV:'development',NODE_ENV:'development'}),false);
 });
+
 test('Browser configuration rejects private keys, legacy JWTs and non-HTTPS endpoints', () => {
   assert.throws(() => publicConfig(undefined,undefined));
   assert.throws(() => publicConfig('https://example.invalid','not-a-publishable-key'));

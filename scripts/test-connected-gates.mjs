@@ -14,7 +14,7 @@ await new Promise(resolve => reservation.listen(0,'127.0.0.1',resolve));
 const port=reservation.address().port;
 await new Promise(resolve => reservation.close(resolve));
 const child=spawn(process.execPath,['--require','./scripts/local-network-only.cjs','node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)],{
-  env:{...process.env,DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'development',SUPABASE_DEV_PROJECT_CONFIRMED:'true',
+  env:{...process.env,VERCEL_ENV:'',VERCEL:'',NEXT_PUBLIC_APP_URL:`http://127.0.0.1:${port}`,DESIGNMELA_MODE:'connected',DESIGNMELA_ENV:'development',SUPABASE_DEV_PROJECT_CONFIRMED:'true',
     DESIGNMELA_ORGANIZATION_ID:'00000000-0000-4000-8000-000000000001',
     NEXT_PUBLIC_SUPABASE_URL:`http://127.0.0.1:${stubPort}`,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_local_test_fixture',
     INITIAL_OWNER_BOOTSTRAP_ENABLED:'false',INITIAL_OWNER_EMAIL:''},

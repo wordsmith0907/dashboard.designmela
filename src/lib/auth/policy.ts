@@ -12,14 +12,6 @@ export function validNewPassword(value: string) {
   return value.length >= 12 && value.length <= 256 && /[a-z]/.test(value) && /[A-Z]/.test(value) && /\d/.test(value) && /[^A-Za-z0-9\s]/.test(value);
 }
 export const passwordGuidance = 'Use at least 12 characters, including uppercase and lowercase letters, a number and a symbol.';
-export function appOrigin(value = 'http://127.0.0.1:3100') {
-  const url = new URL(value);
-  if (url.username || url.password || url.search || url.hash || url.pathname !== '/' ||
-      (url.protocol !== 'https:' && !(url.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(url.hostname)))) {
-    throw new Error('Invalid application origin.');
-  }
-  return url.origin;
-}
 export function authCookieOptions(origin: string) {
   return { path: '/', sameSite: 'lax' as const, httpOnly: true, secure: new URL(origin).protocol === 'https:' };
 }

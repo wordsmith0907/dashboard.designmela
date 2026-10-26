@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { connectedConfig } from '@/lib/server-config';
 import { serverClient } from '@/lib/supabase/server';
-import { appOrigin, safeNext } from '@/lib/auth/policy';
+import { safeNext } from '@/lib/auth/policy';
 export async function GET(request:NextRequest) {
-  const origin=appOrigin(process.env.DESIGNMELA_APP_ORIGIN);
+  let origin: string;
+  try { origin = connectedConfig().origin; }
+  catch { return new NextResponse('Authentication is unavailable.', {status:503,headers:{'Cache-Control':'private, no-store','Referrer-Policy':'no-referrer'}}); }
   const code=request.nextUrl.searchParams.get('code');
   let path='/auth/link-error';
   if (code && /^[A-Za-z0-9_-]{16,512}$/.test(code)) {

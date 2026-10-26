@@ -1,4 +1,5 @@
 import 'server-only';
+import { connectedConfig } from '../server-config';
 import { redirect } from 'next/navigation';
 import { serverClient } from '../supabase/server';
 import { uuidPattern } from './config';
@@ -17,7 +18,7 @@ export async function verifiedUser() {
 }
 export async function workspaceSession(required?:Permission) {
   const {client,user}=await verifiedUser();
-  const org=process.env.DESIGNMELA_ORGANIZATION_ID;
+  const org=connectedConfig().organizationId;
   if (!org || !uuidPattern.test(org)) redirect('/access-pending');
   let result;
   try { result=await client.rpc('workspace_session',{org}); }

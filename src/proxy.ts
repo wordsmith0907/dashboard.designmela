@@ -1,16 +1,16 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
-import { connectedEnabled, publicConfig } from './lib/connected/config';
-import { appOrigin, authCookieOptions } from './lib/auth/policy';
+import { serverConfig } from './lib/server-config';
+import { authCookieOptions } from './lib/auth/policy';
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({request});
   response.headers.set('Cache-Control','private, no-store');
   try {
-    if (!connectedEnabled(process.env)) return response;
-    const env = process.env;
-    const {url,key} = publicConfig(env.NEXT_PUBLIC_SUPABASE_URL,env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
-    const client = createServerClient(url,key,{cookieOptions:authCookieOptions(appOrigin(process.env.DESIGNMELA_APP_ORIGIN)),cookies:{
+    const config = serverConfig();
+    if (config.mode !== 'connected') return response;
+    const {url,key} = config.supabase;
+    const client = createServerClient(url,key,{cookieOptions:authCookieOptions(config.origin),cookies:{
       getAll:() => request.cookies.getAll(),
       setAll: (values,headers) => {
         values.forEach(({name,value}) => request.cookies.set(name,value));

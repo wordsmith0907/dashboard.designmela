@@ -15,8 +15,8 @@ export async function WorkspacePage({path,demo,searchParams}:{path:string;demo:R
   const keys = routeModules[path];
   const page = pageNumber((await searchParams).page);
   return <><h1>{routes.find(r => r.path === path)?.label}</h1>
-    {!keys && <p>{path === '/' ? 'Your development workspace is connected. Open a module to view your permitted records.' : 'Connected functionality for this module is not available yet. No demo records are displayed.'}</p>}
-    {keys && <p>Development release: basic records, edits and archival. Advanced workflows remain unavailable.</p>}
+    {!keys && <p>{path === '/' ? 'Your workspace is connected. Open a module to view your permitted records.' : 'Connected functionality for this module is not available yet. No demo records are displayed.'}</p>}
+    {keys && <p>Basic records, edits and archival. Advanced workflows remain unavailable.</p>}
     {keys && await Promise.all(keys.map(async key => {
       const definition = recordModule(key);
       const records = await listRecords(key,page);

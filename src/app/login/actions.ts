@@ -25,9 +25,7 @@ export async function logout() {
   try { const client=await serverClient(); revoked=!(await client.auth.signOut({scope:'local'})).error; }
   catch { /* Always remove this browser's cookies during a provider outage. */ }
   const jar=await cookies();
-  const env=process.env;
-  const host=new URL(env.NEXT_PUBLIC_SUPABASE_URL!).hostname.split('.')[0];
-  const prefix=`sb-${host}-auth-token`;
-  for (const {name} of jar.getAll()) if (name===prefix || name.startsWith(`${prefix}.`) || name.startsWith(`${prefix}-`)) jar.delete(name);
+  // Clear this host's Supabase auth/verifier chunks even if configuration broke.
+  for (const {name} of jar.getAll()) if (/^sb-[a-z0-9-]+-auth-token(?:[.-].*)?$/.test(name)) jar.delete(name);
   redirect(revoked ? '/login?status=signed-out' : '/login?status=local-signout');
 }
